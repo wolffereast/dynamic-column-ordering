@@ -5,7 +5,6 @@ function order_items(numColumns, targetSelector, callback){
 	if (!jQuery.isNumeric(numColumns) || numColumns < 1) return false;
 	//instantiate vars
 	var maxPerColumn = Math.ceil(jQuery(targetSelector).length/numColumns),
-			numColumns = numColumns - 1,
 			numFull = jQuery(targetSelector).length % numColumns,
 			targetParent = jQuery(targetSelector).parent(),
 			i, j, baseNum, prevItem = false;
@@ -28,10 +27,10 @@ function order_items(numColumns, targetSelector, callback){
 				if (j > numFull) baseNum = i + (j * maxPerColumn) - (j-numFull);
 				else baseNum = i+(j*maxPerColumn);
 				//now, rearrange them
-				if (prevItem == false)jQuery(targetParent).prepend(jQuery('.dynamicColumnOrder'+baseNum));
-				else jQuery(prevItem).after(jQuery('.dynamicColumnOrder'+baseNum));
+				if (prevItem == false)jQuery(targetParent).prepend(jQuery(targetSelector + '.dynamicColumnOrder'+baseNum));
+				else jQuery(prevItem).after(jQuery(targetSelector + '.dynamicColumnOrder'+baseNum));
 				
-				prevItem = '.dynamicColumnOrder'+baseNum;
+				prevItem = targetSelector + '.dynamicColumnOrder'+baseNum;
 			}
 		}
 	}
